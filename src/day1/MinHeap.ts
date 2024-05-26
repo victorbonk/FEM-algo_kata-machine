@@ -8,9 +8,27 @@ export default class MinHeap {
     }
 
     insert(value: number): void {
-
+        this.data[this.length] = value; // add to heap
+        this.heapifyUp(this.length);    // sort the new value
+        this.length++;
     }
     delete(): number {
+        if (this.length === 0) {
+            return -1;
+        }
+
+        const out = this.data[0];
+        this.length--;
+
+        if (this.length === 0) {
+            this.data = [];
+            return out;
+        }
+
+        // move last element to head and heapify down
+        this.data[0] = this.data[this.length];
+        this.heapifyDown(0);
+        return out;
 
     }
 
